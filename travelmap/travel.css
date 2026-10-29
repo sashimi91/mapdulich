@@ -1,0 +1,310 @@
+:root {
+		--bg-color: #f8f9fa;
+		--text-color: #333;
+		--province-default: #D8D8D8;
+		--province-hover: #9ca3af;
+		--province-border: #FFFFFF;
+	}
+
+	/* style riêng cho khung chứa widget */
+	#travel-map-widget {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background-color: var(--bg-color);
+		margin: 0;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: var(--text-color);
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	/* Thanh công cụ phía trên */
+	#travel-map-widget .toolbar {
+		width: 100%;
+		max-width: 800px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: white;
+		padding: 15px 20px;
+		border-radius: 12px;
+		box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+		margin-bottom: 20px;
+		box-sizing: border-box;
+	}
+
+	#travel-map-widget .stats-container {
+		display: flex;
+		gap: 20px;
+	}
+
+	#travel-map-widget .stat-box {
+		background: #fff5e6;
+		border: 1px solid #ffe4b5;
+		padding: 10px 20px;
+		border-radius: 8px;
+		text-align: center;
+	}
+
+	#travel-map-widget .stat-box .number {
+		font-size: 24px;
+		font-weight: bold;
+		color: #f57c00;
+	}
+
+	#travel-map-widget .stat-box .label {
+		font-size: 13px;
+		color: #666;
+	}
+
+	#travel-map-widget .btn-download {
+		background-color: #10b981;
+		color: white;
+		border: none;
+		padding: 12px 24px;
+		border-radius: 25px;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transition: background 0.3s, transform 0.1s;
+	}
+
+	#travel-map-widget .btn-download:hover {
+		background-color: #059669;
+	}
+
+	#travel-map-widget .btn-download:active {
+		transform: scale(0.97);
+	}
+
+	/* Khung chứa bản đồ */
+	#travel-map-widget #map-container {
+		position: relative;
+		width: 100%;
+		max-width: 800px;
+		background: white;
+		border-radius: 12px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		padding: 1px;
+		box-sizing: border-box;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* Style cho SVG Map */
+	#travel-map-widget svg {
+		width: 100%;
+		height: auto;
+		max-height: 85vh;
+		display: block;
+	}
+
+	#travel-map-widget path[data-gd-mm-title] {
+		fill: var(--province-default);
+		stroke: var(--province-border);
+		stroke-width: 0.5;
+		stroke-opacity: 0.7;
+		cursor: pointer;
+		transition: fill 0.2s, filter 0.2s;
+	}
+
+	#travel-map-widget path[data-gd-mm-title]:hover {
+		fill: var(--province-hover);
+		filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+	}
+
+	/* Các trạng thái màu sắc */
+	#travel-map-widget .status-1 { fill: #10b981 !important; }
+	#travel-map-widget .status-2 { fill: #f59e0b !important; }
+	#travel-map-widget .status-3 { fill: #3b82f6 !important; }
+
+	/* Tooltip hiển thị tên tỉnh */
+	#travel-map-widget #tooltip {
+		position: absolute;
+		background: #2d2d2d;
+		color: white;
+		padding: 10px 15px;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: bold;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 0.1s;
+		transform: translate(-50%, -100%);
+		margin-top: -10px;
+		z-index: 10;
+		box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+		text-align: center;
+		min-width: 120px;
+	}
+
+	#travel-map-widget #tooltip::after {
+		content: '';
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -6px;
+		border-width: 6px;
+		border-style: solid;
+		border-color: #2d2d2d transparent transparent transparent;
+	}
+
+	#travel-map-widget .tooltip-hint {
+		font-size: 11px;
+		font-weight: normal;
+		color: #bbb;
+		margin-top: 4px;
+	}
+
+	/* Khung chứa 2 nút */
+	#travel-map-widget .actions-container {
+		display: flex;
+		gap: 10px;
+	}
+
+	/* Nút Đặt lại màu xám */
+	#travel-map-widget .btn-reset {
+		background-color: #9ca3af;
+		color: white;
+		border: none;
+		padding: 12px 20px;
+		border-radius: 25px;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transition: background 0.3s, transform 0.1s;
+	}
+
+	#travel-map-widget .btn-reset:hover { background-color: #6b7280; }
+	#travel-map-widget .btn-reset:active { transform: scale(0.97); }
+
+	/* =========================================
+	   TỐI ƯU HÓA GIAO DIỆN MOBILE
+	   ========================================= */
+	@media screen and (max-width: 768px) {
+		/* 1. Xóa padding thừa của theme Blogger để mở rộng không gian*/
+		body.is-single, #outer-wrapper, .post-body {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+
+		/* Thu gọn padding của widget trên mobile */
+		#travel-map-widget {
+			padding: 0;
+		}
+
+		/* 2. Giảm padding khung bản đồ xuống 5px */
+		#travel-map-widget #map-container {
+			padding: 5px !important;
+			box-sizing: border-box;
+			border-radius: 0; 
+		}
+
+		/* 3. Chia thanh công cụ thành 2 hàng (2-2) bằng Grid */
+		#travel-map-widget .toolbar {
+			display: grid !important; 
+			grid-template-columns: 1fr 1fr; 
+			gap: 10px;
+			padding: 10px !important;
+			width: 100% !important;
+			box-sizing: border-box;
+		}
+		
+		/* Hàng 1: 2 Ô thống kê chiếm trọn chiều ngang */
+		#travel-map-widget .stats-container {
+			grid-column: 1 / -1; 
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			gap: 10px;
+		}
+		
+		/* Hàng 2: 2 Nút bấm chiếm trọn chiều ngang */
+		#travel-map-widget .actions-container {
+			grid-column: 1 / -1; 
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			gap: 10px;
+		}
+
+		/* Cân chỉnh lại kích thước chữ và ô cho vừa vặn */
+		#travel-map-widget .stat-box, 
+		#travel-map-widget .btn-reset, 
+		#travel-map-widget .btn-download {
+			flex: 1; 
+			justify-content: center;
+			padding: 10px 5px !important;
+			margin: 0;
+		}
+		#travel-map-widget .stat-box .number { font-size: 20px !important; }
+		#travel-map-widget .btn-reset, 
+		#travel-map-widget .btn-download { font-size: 14px !important; }
+	}
+
+	/* =========================================
+	   STYLE DÀNH RIÊNG CHO ẢNH XUẤT RA
+	   ========================================= */
+	#travel-map-widget .export-only {
+		display: none; 
+	}
+
+	#travel-map-widget #map-container.is-exporting .export-only {
+		display: block;
+	}
+
+	#travel-map-widget .export-stats {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: rgba(255, 255, 255, 0.95);
+		padding: 15px 20px;
+		border-radius: 10px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		text-align: right;
+		border: 1px solid #eee;
+	}
+
+	#travel-map-widget .export-stats .title {
+		font-size: 16px;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 8px;
+	}
+
+	#travel-map-widget .export-stats .stat-line {
+		font-size: 14px;
+		color: #666;
+		margin-bottom: 4px;
+	}
+
+	#travel-map-widget .export-stats .stat-line span {
+		font-weight: bold;
+		color: #f57c00; 
+		font-size: 16px;
+	}
+
+	#travel-map-widget .export-stats .stat-line.percent span {
+		color: #0284c7; 
+	}
+
+	#travel-map-widget .export-footer {
+		position: absolute;
+		bottom: 15px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		font-size: 13px;
+		color: #888;
+		font-weight: 500;
+		letter-spacing: 0.5px;
+	}

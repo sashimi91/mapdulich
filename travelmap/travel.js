@@ -52,10 +52,10 @@
             return {};
         }
 
-        // Lưu dữ liệu vào cookie (hạn 30 ngày)
+        // Lưu dữ liệu vào cookie (hạn 60 ngày)
         function saveVisitedData(data) {
             const date = new Date();
-            date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
+            date.setTime(date.getTime() + (60 * 24 * 60 * 60 * 1000));
             const expires = "expires=" + date.toUTCString();
             document.cookie = COOKIE_NAME + "=" + encodeURIComponent(JSON.stringify(data)) + ";" + expires + ";path=/";
         }

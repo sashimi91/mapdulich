@@ -55,6 +55,8 @@
     center: { lat: CITY.lat, lng: CITY.lng },
     zoom: CITY.zoom,
     mapId: mapId,
+    zoomControl: true,
+    cameraControl: false,
     streetViewControl: false,
     rotateControl: false,
   });
